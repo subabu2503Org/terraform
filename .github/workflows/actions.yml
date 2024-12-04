@@ -17,9 +17,14 @@ env:
   ARM_TENANT_ID: "${{ secrets.AZURE_AD_TENANT_ID }}"
 
 jobs: 
-  Login:
-    name: Login to Azure And Terraform
+  plan:
+    name: Terraform plan
     runs-on: ubuntu-latest
+    environment: tfplan
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
+    
     steps:
     - uses: actions/checkout@v2
     
