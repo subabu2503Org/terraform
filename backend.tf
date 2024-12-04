@@ -4,5 +4,6 @@ terraform {
     storage_account_name = "sbwstaccounttfbackend"
     container_name       = "terraform-state-github"
     key                  = "terraform-state-github"
+    use_oidc             = true
   }
 }
