@@ -8,6 +8,9 @@ on:
         description: Destroy environment?
         required: true
         default: false
+  push:
+    branches:
+    - main
 
 #Special permissions required for OIDC authentication
 permissions:
