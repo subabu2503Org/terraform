@@ -18,9 +18,11 @@ env:
 
 jobs: 
   Login:
-    name: Login to Azure
+    name: Login to Azure And Terraform
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+    
     - name: Azure CLI Login
       uses: azure/login@v2
       with:
@@ -38,7 +40,7 @@ jobs:
            
     # Install the latest version of the Terraform CLI
     - name: Setup Terraform
-      uses: hashicorp/setup-terraform@v2
+      uses: hashicorp/setup-terraform@v1
       with:
         terraform_wrapper: false
 
