@@ -1,9 +1,13 @@
 name: 'Terraform'
  
 on:
-  push:
-    branches:
-    - main
+  workflow_dispatch:
+    inputs:
+      destroy:
+        type: boolean
+        description: Destroy environment?
+        required: true
+        default: false
 
 #Special permissions required for OIDC authentication
 permissions:
