@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "default" {
-  name     = "container-registry-rg"
-  location = "East US 2"
+  name     = var.resource_group_name
+  location = var.resource_group_location
 
   tags = {
     environment = "Production"
