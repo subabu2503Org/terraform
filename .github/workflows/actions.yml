@@ -96,3 +96,13 @@ jobs:
       env:
         DESTROY: ${{ github.event.inputs.destroy }}
 
+    - name: Terraform Plan
+      id: plan
+      run: terraform plan $DESTROY -no-color --out=out.tfplan
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_USE_OIDC: true
+        DESTROY: ${{ steps.destroy_arg.outputs.val }}
+
