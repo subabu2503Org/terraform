@@ -84,3 +84,15 @@ jobs:
  
     - name: Run TFLint
       run: tflint -f compact
+    
+    - name: Calculate destroy arg
+      id: destroy_arg
+      run: |
+        if [ $DESTROY == "true" ]; then
+          echo "::set-output name=val::-destroy" 
+        else
+          echo "::set-output name=val:: "
+        fi
+      env:
+        DESTROY: ${{ github.event.inputs.destroy }}
+
