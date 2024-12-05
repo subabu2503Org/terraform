@@ -106,3 +106,61 @@ jobs:
         ARM_USE_OIDC: true
         DESTROY: ${{ steps.destroy_arg.outputs.val }}
 
+    - name: Create the plan summary
+      uses: actions/github-script@v6
+      if: always()
+      id: summary
+      env:
+        PLAN: '${{ steps.plan.outputs.stdout }}'
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          // 1. Prep the output
+          const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+          #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+          #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+          <details><summary>Validation Output</summary>
+
+          \`\`\`\n
+          ${{ steps.validate.outputs.stdout }}
+          \`\`\`
+
+          </details>
+
+          #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+          
+          <details><summary>Show Plan</summary>
+          
+          \`\`\`\n
+          ${process.env.PLAN}
+          \`\`\`
+          
+          </details>
+          
+          *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+          
+          // 2. Set the output variable
+          const fs = require('fs');
+          fs.writeFileSync('${{ env.tf_actions_working_dir }}/summary.md', output);
+          core.setOutput('summary', output);
+      
+    - name: Write the step summary
+      if: always()
+      run: cat summary.md >> $GITHUB_STEP_SUMMARY
+
+    - name: Upload the plan
+      uses: actions/upload-artifact@v3
+      with:
+        name: tf-plan
+        path: ${{ env.tf_actions_working_dir }}/out.tfplan
+
+    - name: Publish plan as a status
+      if: github.event_name == 'pull_request'
+      uses: Sibz/github-status-action@v1.1.6
+      with:
+        authToken: ${{ secrets.GITHUB_TOKEN }}
+        state: ${{ steps.summary.outputs.summary }}
+        context: Terraform Plan
+        description: Terraform Plan Summary
+        sha: ${{ github.event.pull_request.head.sha }}
+
