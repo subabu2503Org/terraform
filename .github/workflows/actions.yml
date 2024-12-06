@@ -49,7 +49,8 @@ jobs:
       with:
         azcliversion: latest
         inlineScript: |
-          az account show
+          az --version
+          #az account show
           # You can write your Azure CLI inline scripts here.
            
     # Install the latest version of the Terraform CLI
