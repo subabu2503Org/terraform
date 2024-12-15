@@ -36,6 +36,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
+    - name: List files in the repository
+      run: |
+        ls ${{ github.workspace }}
+        ls -l ${{ github.workspace }}
+        
+    - name: Job Status
+      run: echo "🍏 This job's status is ${{ job.status }}."
     
     - name: Azure CLI Login
       uses: azure/login@v2
