@@ -43,6 +43,9 @@ jobs:
         
     - name: Job Status
       run: echo "🍏 This job's status is ${{ job.status }}."
+        
+    - name: Print a secret value
+      run: echo "🍏 Client Id is ${{ secrets.AZURE_AD_CLIENT_ID }}."
     
     - name: Azure CLI Login
       uses: azure/login@v2
