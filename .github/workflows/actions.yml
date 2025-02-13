@@ -13,7 +13,7 @@ on:
     - infra/**
   push:
     branches:
-    - main
+    - none
 
 env:
   tf_actions_working_dir: infra
