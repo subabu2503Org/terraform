@@ -36,9 +36,13 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: List files in the repository
+    - name: List files in the directory
       run: |
+        pwd
         ls ${{ github.workspace }}
+    - name: Recursively List files in the directory
+      run: |
+        pwd
         ls -lR ${{ github.workspace }}
         
     - name: Job Status
@@ -109,7 +113,7 @@ jobs:
 
     - name: Terraform Plan
       id: plan
-      run: terraform plan $DESTROY -no-color --out=out.tfplan
+      run: terraform plan $DESTROY -no-color --out=tfplan
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -161,19 +165,19 @@ jobs:
 
     - name: Terraform Plan Output to txt
       id: planout
-      run: terraform show -no-color out.tfplan > tfplan.txt
+      run: terraform show -no-color tfplan > tfplan.txt
       
     - name: Upload the plan as tfplan.txt file
       uses: actions/upload-artifact@v4
       with:
         name: tf-plan-txt
-        path: ${{ env.tf_actions_working_dir }}/tfplan.txt
+        path: tfplan.txt
       
-    - name: Upload the plan as out.tfplan file
+    - name: Upload the plan as tfplan file
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
-        path: ${{ env.tf_actions_working_dir }}/out.tfplan
+        path: tfplan
 
     - name: Publish plan as a status
       if: github.event_name == 'pull_request'
