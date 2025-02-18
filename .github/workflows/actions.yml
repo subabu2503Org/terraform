@@ -182,7 +182,7 @@ jobs:
   apply:	
     name: Terraform apply
     runs-on: ubuntu-latest
-    environment: devl
+    environment: tfplan
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
@@ -230,3 +230,14 @@ jobs:
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         ARM_USE_OIDC: true
+				
+    - name: Terraform Apply
+      run: terraform apply out.tfplan
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_USE_OIDC: true
+        DESTROY: ${{ steps.destroy_arg.outputs.val }}
+
+        
