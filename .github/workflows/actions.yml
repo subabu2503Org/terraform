@@ -185,7 +185,8 @@ jobs:
         description: Terraform Plan Summary
         sha: ${{ github.event.pull_request.head.sha }}
 
-  apply:	
+  apply:
+    needs: plan
     name: Terraform apply
     runs-on: ubuntu-latest
     environment: tfplan
