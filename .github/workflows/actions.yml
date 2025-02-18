@@ -36,13 +36,12 @@ jobs:
     
     steps:
     - uses: actions/checkout@v2
-    - name: List files in the directory
+    - name: List files in the current directory
       run: |
         pwd
-        ls ${{ github.workspace }}
-    - name: Recursively List files in the directory
+        ls -l
+    - name: Recursively List files in the github.workspace
       run: |
-        pwd
         ls -lR ${{ github.workspace }}
         
     - name: Job Status
@@ -120,6 +119,11 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         ARM_USE_OIDC: true
         DESTROY: ${{ steps.destroy_arg.outputs.val }}
+        
+    - name: List files in the current directory (after plan)
+      run: |
+        pwd
+        ls -l
 
     - name: Create the plan summary
       uses: actions/github-script@v6
