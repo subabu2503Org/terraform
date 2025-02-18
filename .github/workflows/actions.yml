@@ -174,14 +174,14 @@ jobs:
     - name: Upload the plan as tfplan.txt file
       uses: actions/upload-artifact@v4
       with:
-        name: tf-plan-txt
-        path: tfplan.txt
+        name: tfplan.txt
+        path: ${{ env.tf_actions_working_dir }}/tfplan.txt
       
     - name: Upload the plan as tfplan file
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
-        path: tfplan
+        path: ${{ env.tf_actions_working_dir }}/tfplan
 
     - name: Publish plan as a status
       if: github.event_name == 'pull_request'
