@@ -251,15 +251,12 @@ jobs:
         
     - name: List files in the directroy
       run: |
-        ls ${{ github.workspace }}
+        pwd
+        ls -lt
         
-    - name: Recursively List files from this directroy
-      run: |
-        ls -lR ${{ github.workspace }}
-
     - name: Terraform Apply
       id: apply
-      run: terraform apply -auto-approve out.tfplan
+      run: terraform apply -auto-approve tfplan
       env:
         ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
         ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
