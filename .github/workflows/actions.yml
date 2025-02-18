@@ -163,13 +163,13 @@ jobs:
       id: planout
       run: terraform show -no-color out.tfplan > tfplan.txt
       
-    - name: Upload the plan
+    - name: Upload the plan as tfplan.txt file
       uses: actions/upload-artifact@v4
       with:
         name: tf-plan-txt
         path: ${{ env.tf_actions_working_dir }}/tfplan.txt
       
-    - name: Upload the plan
+    - name: Upload the plan as out.tfplan file
       uses: actions/upload-artifact@v4
       with:
         name: tfplan
@@ -190,9 +190,6 @@ jobs:
     name: Terraform apply
     runs-on: ubuntu-latest
     environment: tfplan
-    defaults:
-      run:
-        working-directory: ${{ env.tf_actions_working_dir }}
     
     steps:
     - uses: actions/checkout@v2
@@ -244,13 +241,16 @@ jobs:
       with:
         name: tfplan
         
-    - name: List files in the repository
+    - name: List files in the directroy
       run: |
         ls ${{ github.workspace }}
+        
+    - name: Recursively List files from this directroy
+      run: |
         ls -lR ${{ github.workspace }}
 
     - name: Terraform Apply
-      run: terraform apply -auto-approve tfplan
+      run: terraform apply -auto-approve out.tfplan
 
       
 
