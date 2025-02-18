@@ -1,5 +1,5 @@
 name: 'Terraform'
- 
+
 on:
   workflow_dispatch:
     inputs:
@@ -178,7 +178,6 @@ jobs:
         context: Terraform Plan
         description: Terraform Plan Summary
         sha: ${{ github.event.pull_request.head.sha }}
-
 
   apply:	
     name: Terraform apply
