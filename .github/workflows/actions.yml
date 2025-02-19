@@ -186,6 +186,10 @@ jobs:
     - name: List files in the terraform directory (after plan)
       run: |
         ls -l ..
+        
+    - name: Recursively List files in the github.workspace
+      run: |
+        ls -lR ${{ github.workspace }}
       
     - name: Upload the .terraform.lock.hcl file
       uses: actions/upload-artifact@v4
