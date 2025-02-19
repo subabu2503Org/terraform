@@ -273,10 +273,10 @@ jobs:
       with:
         name: dot-terraform-dir
   
-    - name: List files in the directroy
+    - name: List files in the directroy (before apply)
       run: |
         pwd
-        ls -lt
+        ls -lta
         
     - name: Terraform Apply
       id: apply
