@@ -183,13 +183,14 @@ jobs:
         name: tfplan
         path: ${{ env.tf_actions_working_dir }}/tfplan
         
-    - name: List files in the terraform directory (after plan)
+    - name: List files in the  directory (after plan)
       run: |
-        ls -l ..
+        pwd
+        ls -ltra ..
         
     - name: Recursively List files in the github.workspace
       run: |
-        ls -lR ${{ github.workspace }}
+        ls -laR ${{ github.workspace }}
       
     - name: Upload the .terraform.lock.hcl file
       uses: actions/upload-artifact@v4
