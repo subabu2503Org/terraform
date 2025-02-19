@@ -183,6 +183,13 @@ jobs:
         pwd
         ls -la 
       
+    - name: Upload the .terraform directory
+      uses: actions/upload-artifact@v4
+      with:
+        name: dot-terraform-dir
+        include-hidden-files: true
+        path: ${{ env.tf_actions_working_dir }}/.terraform
+      
     - name: Upload the .terraform.lock.hcl file
       uses: actions/upload-artifact@v4
       with:
@@ -190,12 +197,6 @@ jobs:
         include-hidden-files: true
         path: ${{ env.tf_actions_working_dir }}/.terraform.lock.hcl
       
-    - name: Upload the summary.md file
-      uses: actions/upload-artifact@v4
-      with:
-        name: summary
-        path: ${{ env.tf_actions_working_dir }}/summary.md
-
     - name: Publish plan as a status
       if: github.event_name == 'pull_request'
       uses: Sibz/github-status-action@v1.1.6
@@ -261,11 +262,17 @@ jobs:
         name: tfplan
         
     # Download saved .terraform.lock.hcl from artifacts  
-    - name: Download Terraform terraform.lock.hclan
+    - name: Download terraform.lock.hcl
       uses: actions/download-artifact@v4
       with:
         name: lock
         
+    # Download saved .terraform directory  
+    - name: Download .terraform directory
+      uses: actions/download-artifact@v4
+      with:
+        name: dot-terraform-dir
+  
     - name: List files in the directroy
       run: |
         pwd
