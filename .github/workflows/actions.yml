@@ -186,7 +186,7 @@ jobs:
     - name: List files in the current directory (after plan)
       run: |
         pwd
-        ls -ltra 
+        ls -la 
         
     - name: Recursively List files in the github.workspace
       run: |
