@@ -195,7 +195,7 @@ jobs:
     - name: Upload the .terraform.lock.hcl file
       uses: actions/upload-artifact@v4
       with:
-        name: lock
+        name: .terraform.lock.hcl
         path: ${{ env.tf_actions_working_dir }}/.terraform.lock.hcl
 
     - name: Publish plan as a status
