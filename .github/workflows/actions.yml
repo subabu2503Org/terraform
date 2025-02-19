@@ -193,6 +193,12 @@ jobs:
       with:
         name: lock
         path: ${{ env.tf_actions_working_dir }}/.terraform.lock.hcl
+      
+    - name: Upload the summary.md file
+      uses: actions/upload-artifact@v4
+      with:
+        name: summary
+        path: ${{ env.tf_actions_working_dir }}/summary.md
 
     - name: Publish plan as a status
       if: github.event_name == 'pull_request'
