@@ -183,10 +183,10 @@ jobs:
         name: tfplan
         path: ${{ env.tf_actions_working_dir }}/tfplan
         
-    - name: List files in the  directory (after plan)
+    - name: List files in the current directory (after plan)
       run: |
         pwd
-        ls -ltra ..
+        ls -ltra 
         
     - name: Recursively List files in the github.workspace
       run: |
