@@ -187,10 +187,6 @@ jobs:
       run: |
         pwd
         ls -la 
-        
-    - name: Recursively List files in the github.workspace
-      run: |
-        ls -laR ${{ github.workspace }}
       
     - name: Upload the .terraform.lock.hcl file
       uses: actions/upload-artifact@v4
