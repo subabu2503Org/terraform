@@ -120,11 +120,6 @@ jobs:
         ARM_USE_OIDC: true
         DESTROY: ${{ steps.destroy_arg.outputs.val }}
         
-    - name: List files in the current directory (after plan)
-      run: |
-        pwd
-        ls -l
-
     - name: Create the plan summary
       uses: actions/github-script@v6
       if: always()
@@ -192,7 +187,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: lock
-        path: ${{ env.tf_actions_working_dir }}/.terraform.lock.hcl
+        path: ./.terraform.lock.hcl
       
     - name: Upload the summary.md file
       uses: actions/upload-artifact@v4
