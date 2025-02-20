@@ -279,6 +279,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: tfplan
+        merge-multiple: true
         path: ${{ env.tf_actions_working_dir }}/tfplan
         
     # Download saved .terraform.lock.hcl from artifacts  
