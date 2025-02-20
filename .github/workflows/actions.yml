@@ -182,6 +182,11 @@ jobs:
       run: |
         pwd
         ls -la 
+        
+    - name: Recursively List files in the current directory (after plan)
+      run: |
+        pwd
+        ls -ltRa 
       
     - name: Upload the .terraform directory
       uses: actions/upload-artifact@v4
