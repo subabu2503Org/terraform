@@ -269,10 +269,10 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         ARM_USE_OIDC: true
         
-    - name: List files in the current directory (after init in apply job)
+    - name: Recursively List files in the current directory (after init in apply job)
       run: |
         pwd
-        ls -la 
+        ls -ltaR 
 
     # Download saved plan from artifacts  
     - name: Download Terraform Plan
@@ -290,20 +290,20 @@ jobs:
         merge-multiple: true
         path: ${{ env.tf_actions_working_dir }}
   
-    - name: List files in the directroy (verify download of .terraform.lock.hcl)
+    - name: List files in the directroy (verify download of tfplan and .terraform.lock.hcl)
       run: |
         pwd
         ls -lta
         
-    # Download saved .terraform directory  
-    - name: Download .terraform directory
+    # Download saved .terraform directory artifacts into the newly created .terraform directory
+    - name: Download .terraform directory artifacts
       uses: actions/download-artifact@v4
       with:
         name: dot-terraform-dir
         merge-multiple: true
         path: ${{ env.tf_actions_working_dir }}/.terraform/
   
-    - name: List files in the directroy (before apply)
+    - name: Recursively List files in the directroy (before apply)
       run: |
         pwd
         ls -ltaR
