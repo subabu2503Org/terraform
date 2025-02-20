@@ -259,15 +259,6 @@ jobs:
     # Install the latest version of the Terraform CLI
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
-           
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
-      env:
-        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
-        ARM_USE_OIDC: true
         
     - name: List files in the current directory (after init in apply job)
       run: |
