@@ -265,10 +265,10 @@ jobs:
         ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
         ARM_USE_OIDC: true
         
-    - name: List files in the current directory (after init in apply job)
+    - name: List files recursively in the current directory (after init in apply job)
       run: |
         pwd
-        ls -la 
+        ls -laR 
 
     # Download saved plan from artifacts  
     - name: Download Terraform Plan
