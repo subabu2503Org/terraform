@@ -287,12 +287,14 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: lock
+        path: ${{ env.tf_actions_working_dir }}
         
     # Download saved .terraform directory  
     - name: Download .terraform directory
       uses: actions/download-artifact@v4
       with:
         name: dot-terraform-dir
+        path: ${{ env.tf_actions_working_dir }}
   
     - name: List files in the directroy (before apply)
       run: |
