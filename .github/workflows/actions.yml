@@ -294,17 +294,6 @@ jobs:
       run: |
         pwd
         ls -lta
-  
-    - name: Create a .terraform directroy and cd there and then download into it (before apply)
-      run: |
-        pwd
-        mkdir .terraform
-        ls -lta
-  
-    - name: List files in the directroy (verify .terraform directory is created)
-      run: |
-        pwd
-        ls -ltaR
         
     # Download saved .terraform directory  
     - name: Download .terraform directory
