@@ -280,7 +280,7 @@ jobs:
       with:
         name: tfplan
         merge-multiple: true
-        path: ${{ env.tf_actions_working_dir }}/tfplan
+        path: ${{ env.tf_actions_working_dir }}
         
     # Download saved .terraform.lock.hcl from artifacts  
     - name: Download terraform.lock.hcl
