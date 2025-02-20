@@ -287,6 +287,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: lock
+        merge-multiple: true
         path: ${{ env.tf_actions_working_dir }}
         
     # Download saved .terraform directory  
@@ -294,6 +295,7 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: dot-terraform-dir
+        merge-multiple: true
         path: ${{ env.tf_actions_working_dir }}
   
     - name: List files in the directroy (before apply)
