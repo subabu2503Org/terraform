@@ -217,11 +217,112 @@ jobs:
         description: Terraform Plan Summary
         sha: ${{ github.event.pull_request.head.sha }}
 
-  apply:
+  apply_to_tfplan:
     needs: plan
-    name: Terraform apply
+    name: Terraform apply to tfplan
     runs-on: ubuntu-latest
     environment: tfplan
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
+    
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: List files in the github.workspace
+      run: |
+        pwd
+        ls -la ${{ github.workspace }}
+        
+    - name: Job Status
+      run: echo "🍏 This job's status is ${{ job.status }}."
+        
+    - name: NOT Print a secret value
+      run: echo "🍏 Client Id is ${{ secrets.AZURE_AD_CLIENT_ID }}."
+    
+    - name: Azure CLI Login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az --version
+          #az account show
+          # You can write your Azure CLI inline scripts here.
+           
+    # Install the latest version of the Terraform CLI
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+           
+    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+    - name: Terraform Init
+      run: terraform init
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_USE_OIDC: true
+        
+    - name: Recursively List files in the current directory (after init in apply job)
+      run: |
+        pwd
+        ls -ltaR 
+
+    # Download saved plan from artifacts  
+    - name: Download Terraform Plan
+      uses: actions/download-artifact@v4
+      with:
+        name: tfplan
+        merge-multiple: true
+        path: ${{ env.tf_actions_working_dir }}
+        
+    # Download saved .terraform.lock.hcl from artifacts  
+    - name: Download terraform.lock.hcl
+      uses: actions/download-artifact@v4
+      with:
+        name: lock
+        merge-multiple: true
+        path: ${{ env.tf_actions_working_dir }}
+  
+    - name: List files in the directroy (verify download of tfplan and .terraform.lock.hcl)
+      run: |
+        pwd
+        ls -lta
+        
+    # Download saved .terraform directory artifacts into the newly created .terraform directory
+    - name: Download .terraform directory artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: dot-terraform-dir
+        merge-multiple: true
+        path: ${{ env.tf_actions_working_dir }}/.terraform/
+  
+    - name: Recursively List files in the directroy (before apply)
+      run: |
+        pwd
+        ls -ltaR
+        
+    - name: Terraform Apply
+      id: apply
+      run: terraform apply -auto-approve tfplan
+      env:
+        ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
+        ARM_USE_OIDC: true
+
+
+  apply_to_devl:
+    needs: plan
+    name: Terraform apply to devl
+    runs-on: ubuntu-latest
+    environment: devl
     defaults:
       run:
         working-directory: ${{ env.tf_actions_working_dir }}
