@@ -1,7 +1,4 @@
 terraform {
-  backend "local" {}
-}
-terraform {
 
   required_version = ">=1.2"
 
