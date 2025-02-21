@@ -8,7 +8,7 @@ terraform {
       version = ">= 3.7.0"
     }
   }
-  backend "local" {}
+  #backend "local" {}
   # Update this block with the location of your terraform state file
   #backend "azurerm" {
     #resource_group_name  = "rg-tf-backend"
