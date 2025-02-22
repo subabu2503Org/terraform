@@ -35,7 +35,12 @@ jobs:
           az --version
           az account show
           # You can write your Azure CLI inline scripts here.
-          dotnet tool install -g azure-cost-cli
+
+    - name: install tool azure-cost-cli
+      run: |
+        pwd
+        dotnet tool install -g azure-cost-cli 
+
 
 
           
