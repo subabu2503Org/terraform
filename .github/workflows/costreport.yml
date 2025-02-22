@@ -1,4 +1,4 @@
-name: 'Terraform'
+name: 'Azure Cost API'
 
 on:
   workflow_dispatch:
