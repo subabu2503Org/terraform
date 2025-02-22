@@ -41,6 +41,14 @@ jobs:
         pwd
         dotnet tool install -g azure-cost-cli 
         azure-cost accumulatedCost -o markdown > cost-report.md
+        
+    - name: Upload the cost-report.md file
+      uses: actions/upload-artifact@v4
+      with:
+        name: AzureCostReport
+        include-hidden-files: true
+        path: cost-report.md
+  
 
 
 
