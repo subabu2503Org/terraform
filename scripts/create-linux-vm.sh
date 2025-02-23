@@ -1,6 +1,8 @@
 pwd
 ls -lta
-az group create  --location canadacentral --name rg-linux-vm
+rg="rg-linux-vm"
+echo $rg
+az group create  --location canadacentral --name $rg
 keyvault_name="sbwlinuxvmcertkv"     
 az keyvault create --resource-group rg-linux-vm --name $keyvault_name --location canadacentral --enabled-for-deployment   
 
