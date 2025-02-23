@@ -19,6 +19,9 @@ az vm create \
  --custom-data .\cloud-init-apache.txt \
  --public-ip-address-dns-name apachesecurevm
 pwd
+ls -la /home/runner/.ssh/
+ls -la /home/runner/.ssh/id_rsa.pub
+cat /home/runner/.ssh/id_rsa.pub
 echo "id_rsa.pub-"
 echo /home/runner/.ssh/id_rsa.pub
 echo "az vm open-port-"
