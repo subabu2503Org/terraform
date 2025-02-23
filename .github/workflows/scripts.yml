@@ -1,0 +1,13 @@
+name: 'Execute Scripts'
+
+on:
+  workflow_dispatch:
+   
+env:
+  tf_actions_working_dir: scripts
+  
+#Special permissions required for OIDC authentication
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
