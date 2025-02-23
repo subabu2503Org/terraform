@@ -11,3 +11,38 @@ permissions:
   id-token: write
   contents: read
   pull-requests: write
+
+jobs: 
+  plan:	
+    name: Create Linux VM
+    runs-on: ubuntu-latest
+    environment: tfplan
+    defaults:
+      run:
+        working-directory: ${{ env.tf_actions_working_dir }}
+    
+    steps:
+    - uses: actions/checkout@v2
+    - name: List files in the current directory
+      run: |
+        pwd
+        ls -l
+    - name: Recursively List files in the github.workspace
+      run: |
+        ls -lR ${{ github.workspace }}
+  
+    - name: Azure CLI Login
+      uses: azure/login@v2
+      with:
+        client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+    - name: Azure CLI script
+      uses: azure/cli@v2
+      with:
+        azcliversion: latest
+        inlineScript: |
+          az --version
+          #az account show
+          # You can write your Azure CLI inline scripts here.
