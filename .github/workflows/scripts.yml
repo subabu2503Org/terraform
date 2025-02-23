@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
    
 env:
-  tf_actions_working_dir: scripts
+  actions_working_dir: scripts
   
 #Special permissions required for OIDC authentication
 permissions:
@@ -19,7 +19,7 @@ jobs:
     environment: tfplan
     defaults:
       run:
-        working-directory: ${{ env.tf_actions_working_dir }}
+        working-directory: ${{ env.actions_working_dir }}
     
     steps:
     - uses: actions/checkout@v2
