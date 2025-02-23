@@ -27,6 +27,8 @@ jobs:
       run: |
         pwd
         ls -l
+        chmod 744 create-linux-vm.sh
+        
     - name: Recursively List files in the github.workspace
       run: |
         ls -lR ${{ github.workspace }}
