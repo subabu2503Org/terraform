@@ -12,9 +12,10 @@ echo "az vm create-"
 az vm create \
  --resource-group $rg \
  --name sbwapacheVM \
- --image UbuntuLTS \
+ --image Ubuntu2204  \
  --admin-username azureuser \
  --generate-ssh-keys \
+ --public-ip-sku Standard \
  --custom-data .\cloud-init-apache.txt \
  --public-ip-address-dns-name apachesecurevm
 echo "az vm open-port-"
