@@ -8,3 +8,12 @@ echo $keyvault_name
 #az keyvault create --resource-group rg-linux-vm --name $keyvault_name --location canadacentral --enabled-for-deployment   
 echo "keyvault certificate list-"
 az keyvault certificate list --vault-name $keyvault_name
+echo "az vm create-"
+az vm create \
+ --resource-group $rg \
+ --name sbwapacheVM \
+ --image UbuntuLTS \
+ --admin-username azureuser \
+ --generate-ssh-keys \
+ --custom-data .\cloud-init-apache.txt \
+ --public-ip-address-dns-name apachesecurevm
