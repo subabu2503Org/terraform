@@ -17,3 +17,8 @@ az vm create \
  --generate-ssh-keys \
  --custom-data .\cloud-init-apache.txt \
  --public-ip-address-dns-name apachesecurevm
+echo "az vm open-port-"
+ az vm open-port \
+--resource-group $rg \
+--name apacheVM \
+--port 443
