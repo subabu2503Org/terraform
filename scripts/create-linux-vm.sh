@@ -21,14 +21,11 @@ az vm create \
 pwd
 ls -la /home/runner/.ssh/
 ls -la /home/runner/.ssh/id_rsa.pub
+echo "id_rsa.pub"
 cat /home/runner/.ssh/id_rsa.pub
-echo "id_rsa.pub-"
-echo /home/runner/.ssh/id_rsa.pub
-echo "az vm open-port-"
- az vm open-port \
---resource-group $rg \
---name sbwapacheVM  \
---port 443
+ls -la /home/runner/.ssh/id_rsa
+echo "id_rsa"
+cat /home/runner/.ssh/id_rsa
 echo "az vm open-port-"
  az vm open-port \
 --resource-group $rg \
