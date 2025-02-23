@@ -7,4 +7,4 @@ keyvault_name="sbwlinuxvmcertkv"
 echo $keyvault_name
 az keyvault create --resource-group rg-linux-vm --name $keyvault_name --location canadacentral --enabled-for-deployment   
 
-az keyvault certificate list --$keyvault_name
+az keyvault certificate list --vault-name $keyvault_name
