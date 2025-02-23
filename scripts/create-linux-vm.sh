@@ -21,5 +21,5 @@ az vm create \
 echo "az vm open-port-"
  az vm open-port \
 --resource-group $rg \
---name apacheVM \
+--name sbwapacheVM  \
 --port 443
