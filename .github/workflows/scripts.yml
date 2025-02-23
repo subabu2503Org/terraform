@@ -46,3 +46,6 @@ jobs:
           az --version
           #az account show
           # You can write your Azure CLI inline scripts here.
+     
+    - name: Run a script from a file
+      run: ./create-linux-vm.sh
