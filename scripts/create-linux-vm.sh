@@ -1,7 +1,8 @@
-az group create --name rg-linux-vm --location canadacentral
+rg-linux-vm = rg-linux-vm
+az group create --name $rg-linux-vm --location canadacentral
 keyvault_name=sbwlinuxvmcertkv     
 az keyvault create \
-    --resource-group dev_certificate \
+    --resource-group $rg-linux-vm \
     --name $keyvault_name \
     --enabled-for-deployment   
 
