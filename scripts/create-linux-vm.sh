@@ -18,8 +18,16 @@ az vm create \
  --public-ip-sku Standard \
  --custom-data .\cloud-init-apache.txt \
  --public-ip-address-dns-name apachesecurevm
+pwd
+echo "id_rsa.pub-"
+echo /home/runner/.ssh/id_rsa.pub
 echo "az vm open-port-"
  az vm open-port \
 --resource-group $rg \
 --name sbwapacheVM  \
 --port 443
+echo "az vm open-port-"
+ az vm open-port \
+--resource-group $rg \
+--name sbwapacheVM  \
+--port 80
