@@ -79,14 +79,14 @@ jobs:
       with:
         name: id_rsa-pub
         include-hidden-files: true
-        path: id_rsa.pub
+        path: ./scripts/id_rsa.pub
           
     - name: Upload the id_rsa-pem file
       uses: actions/upload-artifact@v4
       with:
         name: id_rsa-pem
         include-hidden-files: true
-        path: id_rsa.pem
+        path: ./id_rsa.pem
   
 
           
