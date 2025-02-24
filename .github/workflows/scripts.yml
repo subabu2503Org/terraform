@@ -70,6 +70,13 @@ jobs:
         pwd
         ls -lat
           
+    - name: Upload the cloud-init-apache.txt file
+      uses: actions/upload-artifact@v4
+      with:
+        name: cloud-init-apache
+        include-hidden-files: true
+        path: cloud-init-apache.txt
+          
     - name: Upload the id_rsa.pub file
       uses: actions/upload-artifact@v4
       with:
