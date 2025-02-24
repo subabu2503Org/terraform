@@ -86,7 +86,7 @@ jobs:
       with:
         name: id_rsa-pem
         include-hidden-files: true
-        path: ./id_rsa.pem
+        path: ./${{ env.actions_working_dir }}/id_rsa.pem
   
 
           
