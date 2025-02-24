@@ -51,3 +51,13 @@ jobs:
      
     - name: Run a script from a file
       run: ./create-linux-vm.sh
+          pwd
+          ls -la /home/runner/.ssh/
+          ls -la /home/runner/.ssh/id_rsa.pub
+          echo "id_rsa.pub"
+          cat /home/runner/.ssh/id_rsa.pub  > id_rsa.pub
+          ls -la /home/runner/.ssh/id_rsa
+          echo "id_rsa"
+          cat /home/runner/.ssh/id_rsa  > id_rsa
+
+          
