@@ -57,7 +57,7 @@ jobs:
         pwd
         ls -l
       
-    - name: Run inline scripts
+    - name: Run inline scripts and create cert files
       run: |
         pwd
         ls -la /home/runner/.ssh/
