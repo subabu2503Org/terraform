@@ -43,6 +43,11 @@ jobs:
         pwd
         dotnet tool install -g azure-cost-cli 
         azure-cost accumulatedCost -o markdown > cost-report.md
+      
+    - name: List files in the current directory
+      run: |
+        pwd
+        ls -lat
         
     - name: Upload the cost-report.md file
       uses: actions/upload-artifact@v4
