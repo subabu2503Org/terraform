@@ -55,7 +55,7 @@ jobs:
     - name: List files in the current directory
       run: |
         pwd
-        ls -l
+        ls -lat
       
     - name: Run inline scripts and create cert files
       run: |
@@ -75,14 +75,14 @@ jobs:
       with:
         name: id_rsa-pub
         include-hidden-files: true
-        path: ${{ env.tf_actions_working_dir }}/id_rsa.pub
+        path: id_rsa.pub
           
     - name: Upload the id_rsa-pem file
       uses: actions/upload-artifact@v4
       with:
         name: id_rsa-pem
         include-hidden-files: true
-        path: ${{ env.tf_actions_working_dir }}/id_rsa.pem
+        path: id_rsa.pem
   
 
           
