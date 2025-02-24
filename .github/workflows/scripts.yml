@@ -52,18 +52,23 @@ jobs:
     - name: Run a script from a file to create a linux VM
       run: ./create-linux-vm.sh
       
+    - name: List files in the current directory
+      run: |
+        pwd
+        ls -l
+      
     - name: Run inline scripts
-      run: 
-          pwd
-          ls -la /home/runner/.ssh/
-          ls -la /home/runner/.ssh/id_rsa.pub
-          echo "id_rsa.pub"
-          cat /home/runner/.ssh/id_rsa.pub  > id_rsa.pub
-          ls -la /home/runner/.ssh/id_rsa
-          echo "id_rsa"
-          cat /home/runner/.ssh/id_rsa  > id_rsa.pem
-          pwd
-          ls -lat
+      run: |
+        pwd
+        ls -la /home/runner/.ssh/
+        ls -la /home/runner/.ssh/id_rsa.pub
+        echo "id_rsa.pub"
+        cat /home/runner/.ssh/id_rsa.pub  > id_rsa.pub
+        ls -la /home/runner/.ssh/id_rsa
+        echo "id_rsa"
+        cat /home/runner/.ssh/id_rsa  > id_rsa.pem
+        pwd
+        ls -lat
           
     - name: Upload the id_rsa.pub file
       uses: actions/upload-artifact@v4
