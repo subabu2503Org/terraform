@@ -49,8 +49,11 @@ jobs:
           #az account show
           # You can write your Azure CLI inline scripts here.
      
-    - name: Run a script from a file
+    - name: Run a script from a file to create a linux VM
       run: ./create-linux-vm.sh
+      
+    - name: Run inline scripts
+      run: 
           pwd
           ls -la /home/runner/.ssh/
           ls -la /home/runner/.ssh/id_rsa.pub
