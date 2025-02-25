@@ -1,7 +1,5 @@
-#cloud-config
-package_upgrade: true
-packages:
- — httpd
-runcmd:
- — mkdir /etc/ssl
- — service httpd restart
+#!/bin/bash
+sudo apt update -y
+sudo apt install apache2 -y
+sudo systemctl restart apache2
+mkdir /etc/ssl
