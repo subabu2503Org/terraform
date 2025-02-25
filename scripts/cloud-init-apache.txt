@@ -1,5 +1,7 @@
-#!/bin/sh
-sudo apt update -y
-sudo apt install apache2 -y
-sudo systemctl restart apache2
-mkdir /etc/ssl
+#cloud-config
+package_upgrade: true
+packages:
+ — apache2
+runcmd:
+ — mkdir /etc/ssl
+ — service apache2 restart
