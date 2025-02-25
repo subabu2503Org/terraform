@@ -4,4 +4,4 @@ packages:
  — httpd
 runcmd:
  — mkdir /etc/ssl
- — service https restart
+ — service httpd restart
