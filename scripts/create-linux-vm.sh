@@ -16,7 +16,7 @@ az vm create \
  --admin-username azureuser \
  --generate-ssh-keys \
  --public-ip-sku Standard \
- --custom-data .\cloud-init-apache.txt \
+ --custom-data .\cloud-init-nginx.txt \
  --public-ip-address-dns-name apachesecurevm
 pwd
 ls -la /home/runner/.ssh/
