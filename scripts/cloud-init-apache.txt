@@ -1,7 +1,7 @@
 #cloud-config
 package_upgrade: true
 packages:
- — apache2
+ — httpd
 runcmd:
  — mkdir /etc/ssl
- — service apache2 restart
+ — service https restart
